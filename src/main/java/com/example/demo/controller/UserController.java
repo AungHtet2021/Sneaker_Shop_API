@@ -38,14 +38,25 @@ public class UserController {
 	@PostMapping(value = "/login")
 	public BaseResponse login(@Valid @RequestBody LoginRequest loginRequest) {
 		User user = userService.checkLoginUser(loginRequest.getGmail(),loginRequest.getPassword());
+
 		if(user == null){
+			System.out.println(user);
 			return new BaseResponse(404,"user not found",null);
 		}
 		return new BaseResponse(200,"success login",user);
 	}
 
+//
+//	@PostMapping(value = "/login")
+//	public ResponseEntity login(@Valid @RequestBody LoginRequest loginRequest) {
+//		User user = userService.checkLoginUser(loginRequest.getGmail(),loginRequest.getPassword());
+//		System.out.println(user);
+//		if(user == null) {
+//			return ResponseEntity.badRequest().build();
+//		}
+//		return ResponseEntity.ok().body(user);
+//	}
 
-	
 //	@PostMapping("/encrypt-psd")
 //	public ResponseEntity<?> encryptePassword(@Param("psd") String psd) {
 //

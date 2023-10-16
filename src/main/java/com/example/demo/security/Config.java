@@ -35,16 +35,17 @@ public class Config {
 						.requestMatchers("/", "/api/user/encrypt-psd").permitAll()
 						.requestMatchers("/", "/api/user/register").permitAll()
 						.requestMatchers("/", "/api/user/login").permitAll()
+						.requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
 						.anyRequest().authenticated()).cors().and().csrf().disable();
 
 		return http.build();
+
 	}
 
 	@Bean
 	public UserDetailsService userDetailsService() {
 		UserDetails user = User.withDefaultPasswordEncoder().username("user").password("password").roles("USER")
 				.build();
-
 		return new InMemoryUserDetailsManager(user);
 	}
 
